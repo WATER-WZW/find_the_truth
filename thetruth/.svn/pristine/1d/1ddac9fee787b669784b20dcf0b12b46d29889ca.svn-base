@@ -1,0 +1,32 @@
+﻿<?php
+class IndexAction extends Action 
+{
+
+    public function index() {
+        session_start();
+	error_reporting(1);
+		$this->display();
+    }
+	public function top()
+	{
+		$usrname = $_post['usr_name'];
+		
+		if(!$usrname){$this->error('系统查找不到该操作,请重试!');}
+		$this->assign('usrname',$usrname);
+		$this->display();
+	}
+	public function test2()
+	{
+		$text = $_POST['thetruth'];
+		if(!$text){$this->error('系统查找不到该操作,请重试!');}
+		$this->assign('thetruth',$text);
+		$this->display();
+	}
+	
+	
+	
+	
+	
+}
+?>
+

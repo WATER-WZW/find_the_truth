@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
+<head> 
+<title>首页</title>
+<style>
+body{font:400 14px/25px 'Microsoft Yahei',Tahoma,sans-serif;background:#fff;}
+div{background:#ffd;}
+li{background:#eee;}
+</style>
+</head>
+
+<body>
+<div>
+	 提问人：{$info.author_userid}<span><pre>{$info.content}</pre></span>
+</div>
+	<ul class="thumb">
+	 <volist name="anslist" id="vo">
+	 <li id="list{$vo.id}" class="left">
+	 
+	 <p>
+		 内容：<span id="clname{$vo.id}"><pre>{$vo.content}</pre></span>   回答者：{$vo.answer_id}<br/> 
+		 <a href="{:U('Index/upanddown',array('tag'=>1,'ans_id'=>$vo['id']))}">顶（{$vo.up}）</a>
+		 <a href="{:U('Index/upanddown',array('tag'=>0,'ans_id'=>$vo['id']))}">踩（{$vo.down}）</a>
+	 </p>
+	 </li>
+	 </volist>
+	 </ul>
+	 <form name="form1" id="form1" method="post" action="{:U('Index/submitans',array('id'=>$info['id']))}">
+	 <textarea name="thetruth" rows="10" cols="70" id="thetruth" />我来告诉你们真相！</textarea>
+	 <br/>
+	 支持：<input type="radio" checked="checked" name="zof" value="z" />&nbsp;&nbsp;&nbsp;反对：	<input type="radio" name="zof" value="f" />
+	 <input type="submit" name="submit" value="提交" class="formbtn" />
+	 </form>
+</body>
+</html>

@@ -1,0 +1,161 @@
+﻿<?php
+class IndexAction extends Action 
+{
+
+    public function index() {
+        session_start();
+	error_reporting(1);
+		$this->display();
+    }
+	
+	public function user_name()
+	{
+		session_start();
+		error_reporting(1);
+		
+		$usrname = $_REQUEST['usr_name'];
+		if(!$usrname){$this->error('系统查找不到该操作,请重试!');}
+		
+		$modelcheck=M('user');
+		$addb=$modelcheck->where("username=$usrname")->find();
+		if(!$addb) 
+		{
+			$model=D("user");
+			$mydata['username']=$usrname;
+			if($mydata) 
+			{
+				$result	=$model->add($mydata);
+				if($result)
+				{
+					$_SESSION['name']=$usrname;
+					$this->success('成功登陆','top');
+				}
+				else{$this->error('登陆失败');}
+			}
+			else
+			{
+				$this->error('登陆失败');
+			}
+		}
+		else
+		{
+			$_SESSION['name']=$addb['username'];
+			$this->success('成功登陆','top');
+		}
+	}
+	public function submit()
+	{
+		session_start();
+		error_reporting(1);
+		$text = $_REQUEST['thetruth'];
+		if(!$text){$this->error('系统查找不到该操作,请重试!');}
+		$model=D("info");
+		$mydata['content']=$text;
+		$mydata['author_userid']=$_SESSION['name'];
+		$mydata['state']=0;
+		$mydata['label']='你妹';
+		$mydata['z']=0;
+		$mydata['f']=0;
+		if($mydata) 
+		{
+			$result	=$model->add($mydata);
+			if($result)
+			{
+				$this->success('提交成功');
+			}
+			else{$this->error('提交失败');}
+		}
+		else
+		{
+			$this->error('提交失败');
+		}
+		
+	}
+	public function top()
+	{
+		session_start();
+		error_reporting(1);
+		$usrname = $_SESSION['name'];
+		$model=M('info');
+		$list=$model->select();
+		if(!$usrname){$this->error('系统查找不到该操作,请重试!');}
+		$this->assign('infolist',$list);
+		$this->assign('usrname',$usrname);
+		$this->display();
+	}
+	public function answerlist()
+	{
+		session_start();
+		error_reporting(1);
+		$id = $_REQUEST['id'];
+		if(!$id){$this->error('系统查找不到该操作,请重试!');}
+		echo $id;
+		$model=M("ans");
+		$model2=M("info");
+		$list=$model->where("info_id=$id")->select();
+		$info=$model2->where("id=$id")->find();
+		$this->assign('info',$info);
+		$this->assign('anslist',$list);
+		$this->display();
+	}
+	public function submitans()
+	{
+		session_start();
+		error_reporting(1);
+		$zof=$_POST['zof'];
+		$text=$_POST['thetruth'];
+		$id = $_REQUEST['id'];
+		if(!$zof){$this->error('系统查找不到该操作,请重试!');}
+		$modelb=M("info");
+		$model=D("ans");
+		$mydata['answer_id']=$_SESSION['name'];
+		$mydata['content']=$text;
+		$mydata['info_id']=$id;
+		
+		if($zof=='z')
+		{
+			$mydata['zorf']=1;
+		}
+		else
+		{
+			$mydata['zorf']=0;
+		}
+		echo $mydata['info_id'];
+		echo $mydata['content'];
+		echo $mydata['answer_id'];
+		echo $mydata['zorf'];
+		if($mydata)
+		{
+			$result	=$model->add($mydata);
+			if($result)
+			{
+				if($mydata['zorf'])
+				{
+					$modelb->where("id=$id")->setInc("z",1);
+				}
+				else
+				{
+					$modelb->where("id=$id")->setInc("f",1);
+				}
+				$this->success('提交成功');
+			}
+			else
+			{
+				$this->error('提交失败1');
+			}
+		}
+		else
+		{
+			$this->error('提交失败2');
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
+}
+?>
+

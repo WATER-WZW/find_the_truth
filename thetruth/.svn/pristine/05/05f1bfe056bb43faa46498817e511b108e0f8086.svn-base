@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>求真相</title>
+<style>
+body{font:400 14px/25px 'Microsoft Yahei',Tahoma,sans-serif;background:#fff;}
+</style>
+</head>
+<script type="text/javascript">
+ function namepass()
+ {
+   document.form1.action = "{:U('Index/top')}";
+	document.form1.submit();
+ }
+
+ </script>
+<body>
+<form name="form1" id="form1" method="post">
+    <input type="text" name="usr_name" size="30" maxlength="20" class="inputtxt_small" id="usr_name" />
+	<input type="button" name="submit1" value="进入" class="formbtn" onclick="javascript:namepass();" />
+</form>
+</body>
+</html>

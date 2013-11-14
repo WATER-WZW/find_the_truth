@@ -1,0 +1,40 @@
+﻿<?php
+class IndexAction extends Action 
+{
+
+    public function index() {
+        session_start();
+	error_reporting(1);
+		$this->display();
+    }
+	public function top()
+	{
+		$usrname = $_REQUEST['usr_name'];
+		
+		if(!$usrname){$this->error('系统查找不到该操作,请重试!');}
+		session("usr")=$usrname;
+		$model=D("truth_user");
+		$mydata['username']=$usrname;
+		if($mydata) {
+			$result	=$model->add($mydata);
+			}
+		$this->display();
+	}
+	public function test2()
+	{
+		$text = $_REQUEST['thetruth'];
+		if(!$text){$this->error('系统查找不到该操作,请重试!');}
+		$model=D("truth_info");
+		$mydata['content']=$text;
+		$mydata['author_userid']=$text;
+		$this->assign('thetruth',$text);
+		$this->display();
+	}
+	
+	
+	
+	
+	
+}
+?>
+

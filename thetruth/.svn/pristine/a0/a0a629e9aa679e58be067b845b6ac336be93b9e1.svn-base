@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
+<head> 
+<title>首页</title>
+<style>
+body{font:400 14px/25px 'Microsoft Yahei',Tahoma,sans-serif;background:#fff;}
+</style>
+</head>
+<script type="text/javascript">
+ function textpass()
+ {
+   document.form1.action = "{:U('Index/test2')}";
+	document.form1.submit();
+ }
+
+ </script>
+<body>
+	{$usrname}
+	<form name="form1" id="form1" method="post">
+	 <textarea name="thetruth" rows="10" cols="70" id="thetruth" />
+	 请在这里输入想要寻找的真相
+	 </textarea>
+	 <input type="button" name="submit1" value=" 提交" class="formbtn" onclick="javascript:textpass();" />
+	 </form>
+	 <ul class="thumb">
+	 <volist name="infolist" id="vo">
+	 <li id="list{$vo.id}" class="left">
+	 <p>
+		 内容：<span id="clname{$vo.id}"><pre>{$vo.content}</pre></span>支持：{$vo.z}<br/>反对：{$vo.f}<br/> 提问人：{$vo.author_userid}<br/>
+	 </p>
+	 </li>
+	 </volist>
+	 </ul>
+</body>
+</html>

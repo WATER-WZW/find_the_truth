@@ -1,0 +1,31 @@
+﻿<?php
+class IndexAction extends Action 
+{
+
+    public function index() {
+        session_start();
+	error_reporting(1);
+		$this->display();
+    }
+	public function top()
+	{
+		$usrname = $_REQUEST['usr_name'];
+		if(!$usrname){$this->showmsg_box('系统查找不到该操作,请重试!',__APP__,0,10);}
+		$this->assign('usrname',$usrname);
+		$this->display();
+	}
+	public function test2()
+	{
+		$text = $_REQUEST['thetruth'];
+		if(!$thetruth){$this->showmsg_box('系统查找不到该操作,请重试!',__APP__,0,10);}
+		$this->assign('thetruth',$thetruth);
+		$this->display();
+	}
+	
+	
+	
+	
+	
+}
+?>
+

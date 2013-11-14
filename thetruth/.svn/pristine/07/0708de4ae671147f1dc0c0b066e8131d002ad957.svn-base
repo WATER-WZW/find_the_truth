@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
+<head> 
+<title>首页</title>
+<style>
+body{font:400 14px/25px 'Microsoft Yahei',Tahoma,sans-serif;background:#fff;}
+div{background:#ffd;}
+</style>
+</head>
+
+<body>
+<div>
+	<span><pre>{$info.content}</pre></span>
+<div>
+	<ul class="thumb">
+	 <volist name="anslist" id="vo">
+	 <li id="list{$vo.id}" class="left">
+	 
+	 <p>
+		 内容：<span id="clname{$vo.id}"><pre>{$vo.content}</pre></span>   回答者：{$vo.answer_id}<br/>
+	 </p>
+	 </li>
+	 </volist>
+	 </ul>
+</body>
+</html>

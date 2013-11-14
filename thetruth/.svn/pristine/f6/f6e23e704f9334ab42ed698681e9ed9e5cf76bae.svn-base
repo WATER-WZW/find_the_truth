@@ -1,0 +1,176 @@
+﻿<?php
+
+/**
+ * 本页仅供测试
+ */
+
+
+class IndexAction extends Action {
+
+    public function index() {
+    }
+
+    //模拟器首页
+    public function imit() {
+        
+    }
+
+    //平滑性测试
+    public function pinghua() {
+       
+    }
+    
+    public function mysql(){
+       
+    }
+
+    public function new_features(){
+        
+    }
+
+    public function sms_alert(){
+
+    }
+
+    public function send_sms(){
+           
+    }
+
+    public function sae_runtime(){
+       
+    }
+
+    public function spare_db(){
+         
+    }
+
+    public function log() {
+      
+    }
+
+    public function image() {
+       
+    }
+
+    public function verify() {
+      
+    }
+
+    //S缓存的平滑性检测
+    public function scache() {
+       
+    }
+
+    //F缓存的平滑性，使用前需要在SAE平台对KVDB进行初始化
+    public function fcache() {
+      
+    }
+
+    //上传文件平滑性测试
+
+    public function upload() {
+       
+    }
+
+    //删除图片
+    public function unlink() {
+        
+    }
+
+    //Counter测试
+    public function counter() {
+       
+    }
+
+    //KVDB测试
+    public function kv() {
+       
+    }
+
+    //rank排行榜测试
+    public function rank() {
+       
+    }
+
+    //memcache测试
+    //内置了memcache模拟器，即使本地环境不支持memcache也能运行。
+    public function mc() {
+       
+    }
+
+    //taskqueue 任务列队测试，本地环境需要配置curl
+    public function tq() {
+      
+    }
+
+    //列队任务1
+    public function tq_test1() {
+           }
+
+    //列队任务2
+    public function tq_test2() {
+           }
+
+    //storage测试
+    public function storage() {
+       
+    }
+
+    //Mail测试
+    public function mail() {
+       
+    }
+
+    //fetchURL测试
+    public function fetchurl() {
+       
+    }
+
+    //wrappers 测试
+    public function wrappers() {
+        file_put_contents('saemc://name', 'Memcache');
+        echo file_get_contents('saemc://name');
+        echo '<br />';
+        file_put_contents('saestor://Public/upload/test.txt', 'SaeStorage');
+        echo file_get_contents('saestor://Public/upload/test.txt');
+    }
+
+    //SaeImage 测试
+    public function saeimage() {
+        //从网络上抓取要合成的多张图片
+        $img1 = file_get_contents('http://ss2.sinaimg.cn/bmiddle/53b05ae9t73817f6bf751&690');
+        $img2 = file_get_contents('http://timg.sjs.sinajs.cn/miniblog2style/images/common/logo.png');
+        $img3 = file_get_contents('http://i1.sinaimg.cn/home/deco/2009/0330/logo_home.gif');
+
+//实例化SaeImage并取得最大一张图片的大小，稍后用于设定合成后图片的画布大小
+        $img = new SaeImage($img1);
+        $size = $img->getImageAttr();
+
+//清空$img数据
+        $img->clean();
+
+//设定要用于合成的三张图片（如果重叠，排在后面的图片会盖住排在前面的图片）
+        $img->setData(array(
+            array($img1, 0, 0, 1, SAE_TOP_LEFT),
+            array($img2, 0, 0, 0.5, SAE_BOTTOM_RIGHT),
+            array($img3, 0, 0, 1, SAE_BOTTOM_LEFT),
+        ));
+
+//执行合成
+        $img->composite($size[0], $size[1]);
+
+//输出图片
+        $img->exec('jpg', true);
+    }
+
+    //saemysql,  本地支持SaeMysql，不过建议用ThinkPHP的Model进行对数据库的操作
+    public function saemysql() {
+        $mysql = new SaeMysql();
+        $mysql->runSql('create table saetest(`id` int(11) NOT NULL);');
+        echo '在本地时请先配置好数据库，本程序执行完毕后会向数据库中建立名为saetest数据表';
+    }
+
+}
+
+?>
+

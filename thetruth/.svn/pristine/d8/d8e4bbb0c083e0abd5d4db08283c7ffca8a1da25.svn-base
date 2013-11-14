@@ -1,0 +1,69 @@
+﻿<?php
+class IndexAction extends Action 
+{
+
+    public function index() {
+        session_start();
+	error_reporting(1);
+		$this->display();
+    }
+	public function top()
+	{
+		session_start();
+		error_reporting(1);
+		$usrname = $_SESSION['name'];
+		
+		if(!$usrname){$this->error('系统查找不到该操作,请重试!');}
+		$this->assign('usrname',$usrname);
+		$this->display();
+	}
+	public function user_name()
+	{
+		session_start();
+		error_reporting(1);
+		
+		$usrname = $_REQUEST['usr_name'];
+		if(!$usrname){$this->error('系统查找不到该操作,请重试!');}
+		
+		$modelcheck=M('user');
+		$addb=$modelcheck->where("username=$usrname")->find();
+		if(!$addb) 
+		{
+			$model=D("user");
+			$mydata['username']=$usrname;
+			if($mydata) 
+			{
+				$result	=$model->add($mydata);
+			}
+			if($result)
+			{
+				$_SESSION['name']=$usrname;
+				$this->success('成功登陆','Index/top');
+				
+			}
+			else{$this->error('登陆失败');}
+		}
+		else
+		{
+			$_SESSION['name']=$addb['username'];
+			$this->success('成功登陆','Index/top');
+		}
+	}
+	public function test2()
+	{
+		$text = $_REQUEST['thetruth'];
+		if(!$text){$this->error('系统查找不到该操作,请重试!');}
+		$model=D("truth_info");
+		$mydata['content']=$text;
+		$mydata['author_userid']=$text;
+		$this->assign('thetruth',$text);
+		$this->display();
+	}
+	
+	
+	
+	
+	
+}
+?>
+

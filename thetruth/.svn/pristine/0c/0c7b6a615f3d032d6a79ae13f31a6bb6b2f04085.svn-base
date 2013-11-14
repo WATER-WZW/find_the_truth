@@ -1,0 +1,27 @@
+﻿<?php
+
+
+class IndexAction extends Action 
+{
+
+    public function index() {
+        session_start();
+	error_reporting(1);
+		this->display();
+	
+    }
+	public function top()
+	{
+		$usrname = $_REQUEST['usr_name'];
+		this->assign('usrname',$usrname);
+		this->display();
+	}
+	
+	
+	
+	
+	
+	
+}
+?>
+
