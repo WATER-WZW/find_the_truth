@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" language="JavaScript"></script>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
+<head> 
+<title>首页</title>
+<style>
+body{font:400 14px/25px 'Microsoft Yahei',Tahoma,sans-serif;background:#fff;}
+div{background:#ffd;}
+li{background:#eee;}
+</style>
+</head>
+
+<body>
+<h2><a href="{:U('Index/top')}">回到大厅</a></h2>
+	<ul class="thumb">
+	 <volist name="thetruth" id="vo">
+	 <li id="list{$vo.id}" class="left">
+	 <div>
+	 <p>
+		 内容：<a href="{:U('Index/answerlist',array('id'=>$vo['id']))}"><span id="clname{$vo.id}"><pre>{$vo.content}</pre></span></a>支持：{$vo.z}      反对：{$vo.f}      提问人：{$vo.author_userid}<br/>
+	 </p>
+	 </div>
+	 </li>
+	 </volist>
+	 </ul>
+</body>
+</html>
