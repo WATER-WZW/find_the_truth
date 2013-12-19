@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" language="JavaScript"></script>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
+<head> 
+<title>首页</title>
+<link href="/App/Tpl/Index/allcss.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="content">
+<h2><a href="{:U('Index/index')}">回到大厅</a></h2>
+<div>
+    &nbsp;提问人：{$info.author_userid}<span>
+    &nbsp;标签：{$info.label}
+    <pre>&nbsp;{$info.content}</pre></span><if condition="$info.state eq 0">&nbsp;求真相中……</if><if condition="$info.state eq 1">这是真相！</if><if condition="$info.state eq 2">这是假象！</if><if condition="$info.state eq 3">真假难辨</if>
+</div>
+	<ul class="thumb">
+	 <volist name="anslist" id="vo">
+	 <li id="list{$vo.id}" class="left">
+	 <div class="mdiv"><p>
+       <h3>&nbsp;<if condition="($vo.zorf eq 1)">支持者:<else/>反对者:</if>{$vo.answer_id}</h3>
+         &nbsp;内容：<span id="clname{$vo.id}"><pre>&nbsp;{$vo.content}</pre></span>   <if condition="($vo.photo neq NULL)"><img src="/Public/Uploads/Photo/b_{$vo.photo}" alt="{$vo.id}"/><br/>
+         </if>
+		 &nbsp;<a href="{:U('Index/upanddown',array('tag'=>'z','ans_id'=>$vo['id']))}">顶（{$vo.up}）</a>
+		 <a href="{:U('Index/upanddown',array('tag'=>'f','ans_id'=>$vo['id']))}">踩（{$vo.down}）</a>
+	</p></div>
+	 </li>
+	 </volist>
+</ul>
+<form name="form1" id="form1" method="post" enctype="multipart/form-data" action="{:U('Index/submitans',array('id'=>$info['id']))}">
+	 &nbsp;<textarea name="thetruth" rows="10" cols="70" id="thetruth" value="我来告诉你们真相！" onfocus="if(this.value=='我来告诉你们真相！'){this.value=''}" onblur="if(this.value=='') {this.value='我来告诉你们真相！'}">我来告诉你们真相！</textarea>
+	 <br/>
+        &nbsp; 支持：<input type="radio" checked="checked" name="zof" value="z" />&nbsp;&nbsp;&nbsp;反对：	<input type="radio" name="zof" value="f" /><br/>
+     &nbsp;<input type="file" name="file_upload" id="file_upload"/>
+	 <input type="submit" name="submit" value="提交" class="formbtn" />
+</form>
+</div>
+</body>
+</html>

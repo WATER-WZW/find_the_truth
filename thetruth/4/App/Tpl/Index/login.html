@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1
+
+-transitional.dtd">
+<script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" 
+
+language="JavaScript"></script>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
+<head> 
+<title>首页</title>
+<link href="/App/Tpl/Index/allcss.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div class="content">
+    <h3><strong>{$usrname},请选择您感兴趣的分组</strong></h3>
+	<form name="form1" id="form1" method="post" action="{:U('Index/login_cs')}">
+	<input name="label[]" type="checkbox"  value = 1>电子数码
+	<input name="label[]" type="checkbox"  value = 2>医疗健康
+	<input name="label[]" type="checkbox"  value = 3>国际新闻
+	<input name="label[]" type="checkbox"  value = 4>社会民生
+	<input name="label[]" type="checkbox"  value = 5>游戏
+	<input name="label[]" type="checkbox"  value = 6>教育科学
+	<input name="label[]" type="checkbox"  value = 7>灵异事件
+	<input name="label[]" type="checkbox"  value = 8>文化艺术
+	<input name="label[]" type="checkbox"  value = 9>商业理财
+	<input name="label[]" type="checkbox"  value = 10>其他
+	<br/>
+	<input type="submit" name="submit" value="提交" class="formbtn" />
+</form>
+	
+</div>
+</body>
+</html>

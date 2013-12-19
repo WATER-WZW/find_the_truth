@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" language="JavaScript"></script>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
+<head> 
+<title>求真相</title>
+<link href="/App/Tpl/Index/allcss.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="content">
+<h2><a href="{:U('Index/index')}">回到大厅</a></h2>
+    <form name="form1" id="form1" method="post" action="{:U('Truth/user')}">
+    &nbsp;搜索微博用户：<input type="text" name="name" size="30" maxlength="20" class="inputtxt_small" id="name" />
+<input type="submit" name="submit" value="搜索" class="formbtn" />
+    </form>
+	<ul class="thumb">
+	 <volist name="weibolist" id="vo">
+      <if condition="($vo['user'][screen_name] eq $username)"><else/>
+	 <li id="list{$vo.id}" class="left">
+	 <div class="mdiv">
+	 <p>
+         &nbsp;{$vo['user'].screen_name}<br/>
+         &nbsp;微博内容：<a href="{:U('Truth/submit',array('id'=>$vo['id'],'text'=>$vo['text']))}">{$vo.text}</a><br/>
+	 </p>
+	 </div>
+	 </li>
+     </if>
+	 </volist>
+  </ul>
+</div>
+</body>
+</html>

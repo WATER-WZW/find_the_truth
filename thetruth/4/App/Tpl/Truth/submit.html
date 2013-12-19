@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" language="JavaScript"></script>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
+<head> 
+<title>求真相</title>
+<link href="/App/Tpl/Index/allcss.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="content">
+<h2><a href="{:U('Truth/index')}">返回</a></h2>
+    &nbsp;{$info.text}
+    <form name="form1" id="form1" method="post" action="{:U('Truth/textsubmit',array('id'=>$info['id']))}">
+       &nbsp; <input type="text" name="day" size="10" maxlength="5" class="inputtxt_small" id="day" />天<input type="text" name="hour" size="10" maxlength="5" class="inputtxt_small" id="hour" />小时<input type="text" name="minute" size="10" maxlength="5" class="inputtxt_small" id="minute" />分<input type="text" name="second" size="10" maxlength="5" class="inputtxt_small" id="second" /> 秒 <br/>  
+       &nbsp; <input type="text" name="actor" size="10" maxlength="5" class="inputtxt_small" id="actor" />参与者数
+    <input type="submit" name="submit" value="求真相" class="formbtn" />
+    </form>
+	</div>
+</body>
+</html>
