@@ -8,17 +8,20 @@
 <body>
 <div class="content">
 <h2><a href="{:U('Index/index')}">回到大厅</a></h2>
-<div>
-    &nbsp;提问人：{$info.author_userid}<span>
+<div style="border: solid 1px #e9ebf0;word-wrap:break-word; word-break:normal">
+    &nbsp;提问人：{$info.author_userid}&nbsp;&nbsp;&nbsp;<if condition="($info.bldr eq 0)"><else/><img src="http://thetruth.sinaapp.com/bl.jpg" title="爆料达人" alt="爆料达人">{$info.bldr}</if>&nbsp;&nbsp;&nbsp;<if condition="($info.zydr eq 0)"><else/><img src="http://thetruth.sinaapp.com/zy.jpg" title="造谣达人" alt="造谣达人">{$info.zydr}</if><span>
     &nbsp;标签：{$info.label}
-    <pre>&nbsp;{$info.content}</pre></span><if condition="$info.state eq 0">&nbsp;求真相中……</if><if condition="$info.state eq 1">这是真相！</if><if condition="$info.state eq 2">这是假象！</if><if condition="$info.state eq 3">真假难辨</if>
+    <pre>&nbsp;{$info.content}<br/>
+<if condition="($info.url neq NULL)"><img src="{$info.url}" /><br/></if>
+</pre></span><if condition="$info.state eq 0">&nbsp;求真相中……</if><if condition="$info.state eq 1">这是真相！</if><if condition="$info.state eq 2">这是假象！</if><if condition="$info.state eq 3">真假难辨</if>
 </div>
 	<ul class="thumb">
 	 <volist name="anslist" id="vo">
 	 <li id="list{$vo.id}" class="left">
-	 <div class="mdiv"><p>
-       <h3>&nbsp;<if condition="($vo.zorf eq 1)">支持者:<else/>反对者:</if>{$vo.answer_id}</h3>
-         &nbsp;内容：<span id="clname{$vo.id}"><pre>&nbsp;{$vo.content}</pre></span>   <if condition="($vo.photo neq NULL)"><img src="/Public/Uploads/Photo/b_{$vo.photo}" alt="{$vo.id}"/><br/>
+	 <div class="mdiv">
+         <p>
+             <h3>&nbsp;<if condition="($vo.zorf eq 1)">支持者:<else/>反对者:</if>{$vo.answer_id}&nbsp;&nbsp;&nbsp;<if condition="($vo.zxdr eq 0)"><else/><img src="http://thetruth.sinaapp.com/zx.jpg" title="真相达人" alt="真相达人">{$vo.zxdr}</if></h3>
+         &nbsp;内容：<span id="clname{$vo.id}"><pre>{$vo.content}</pre></span>   <if condition="($vo.photo neq NULL)"><img src="/Public/Uploads/Photo/b_{$vo.photo}" alt="{$vo.id}"/><br/>
          </if>
 		 &nbsp;<a href="{:U('Index/upanddown',array('tag'=>'z','ans_id'=>$vo['id']))}">顶（{$vo.up}）</a>
 		 <a href="{:U('Index/upanddown',array('tag'=>'f','ans_id'=>$vo['id']))}">踩（{$vo.down}）</a>
@@ -26,11 +29,14 @@
 	 </li>
 	 </volist>
 </ul>
+    <div class="clr"></div>
+	{$page} 
+<div class="clr"></div>
 <form name="form1" id="form1" method="post" enctype="multipart/form-data" action="{:U('Index/submitans',array('id'=>$info['id']))}">
 	 &nbsp;<textarea name="thetruth" rows="10" cols="70" id="thetruth" value="我来告诉你们真相！" onfocus="if(this.value=='我来告诉你们真相！'){this.value=''}" onblur="if(this.value=='') {this.value='我来告诉你们真相！'}">我来告诉你们真相！</textarea>
 	 <br/>
         &nbsp; 支持：<input type="radio" checked="checked" name="zof" value="z" />&nbsp;&nbsp;&nbsp;反对：	<input type="radio" name="zof" value="f" /><br/>
-     &nbsp;<input type="file" name="file_upload" id="file_upload"/>
+     &nbsp;上传图片：<input type="file" name="file_upload" id="file_upload"/>
 	 <input type="submit" name="submit" value="提交" class="formbtn" />
 </form>
 </div>

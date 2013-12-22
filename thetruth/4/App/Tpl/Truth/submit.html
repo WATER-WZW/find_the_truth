@@ -8,8 +8,21 @@
 <body>
 <div class="content">
 <h2><a href="{:U('Truth/index')}">返回</a></h2>
-    &nbsp;{$info.text}
+    &nbsp;{$info.text}<br/>
+    <if condition="($info.bmiddle_pic neq NULL)"><img src="{$info.bmiddle_pic}" /><br/></if>
     <form name="form1" id="form1" method="post" action="{:U('Truth/textsubmit',array('id'=>$info['id']))}">
+        <input name="label" type="radio" value = "电子数码">电子数码
+	<input name="label" type="radio"  value = "医疗健康">医疗健康
+	<input name="label" type="radio"  value = "国际新闻">国际新闻
+	<input name="label" type="radio"  value = "社会民生">社会民生
+	<input name="label" type="radio"  value = "游戏">游戏
+	<input name="label" type="radio"  value = "教育科学">教育科学
+	<input name="label" type="radio"  value = "灵异事件">灵异事件
+	<input name="label" type="radio"  value = "文化艺术">文化艺术
+	<input name="label" type="radio"  value = "商业理财">商业理财
+	<input name="label" type="radio"  value = "其他">其他
+	<br/>
+        用于判定真相最低的时间和参与人数：<br/>
        &nbsp; <input type="text" name="day" size="10" maxlength="5" class="inputtxt_small" id="day" />天<input type="text" name="hour" size="10" maxlength="5" class="inputtxt_small" id="hour" />小时<input type="text" name="minute" size="10" maxlength="5" class="inputtxt_small" id="minute" />分<input type="text" name="second" size="10" maxlength="5" class="inputtxt_small" id="second" /> 秒 <br/>  
        &nbsp; <input type="text" name="actor" size="10" maxlength="5" class="inputtxt_small" id="actor" />参与者数
     <input type="submit" name="submit" value="求真相" class="formbtn" />

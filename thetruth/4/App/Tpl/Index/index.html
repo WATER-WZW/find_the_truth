@@ -7,7 +7,8 @@
 </head>
 <body>
 	<div class="content">
-	  <h3><strong>{$usrname},您好！</strong></h3>
+	  <div id="body" style="float:left; height:50px;width:800px"><h3><strong>{$usrname},您好！</strong></h3></div>
+      <div id="body-right"style="float:left; height:50px;width:90px"><h4><a href="{:U('Index/changein')}">修改个人资料</a></h4></div>
 	  <form name="form1" id="form1" method="post" action="{:U('Index/submit')}">
         <textarea name="thetruth" rows="10" cols="70" id="thetruth" value="请在这里输入想要寻找的真相" onfocus="if(this.value=='请在这里输入想要寻找的真相'){this.value=''}" onblur="if(this.value=='') {this.value='请在这里输入想要寻找的真相'}">请在这里输入想要寻找的真相</textarea><br/>
     <input name="label" type="radio" value = "电子数码">电子数码
@@ -21,13 +22,14 @@
 	<input name="label" type="radio"  value = "商业理财">商业理财
 	<input name="label" type="radio"  value = "其他">其他
 	<br/>
+          用于判定真相最低的时间和参与人数：<br/>
 	 <input type="text" name="day" size="10" maxlength="5" class="inputtxt_small" id="day" />天<input type="text" name="hour" size="10" maxlength="5" class="inputtxt_small" id="hour" />小时<input type="text" name="minute" size="10" maxlength="5" class="inputtxt_small" id="minute" />分<input type="text" name="second" size="10" maxlength="5" class="inputtxt_small" id="second" /> 秒 <br/>
      <input type="text" name="actor" size="10" maxlength="5" class="inputtxt_small" id="actor" />参与者数
-     <input type="submit" name="submit" value="提交" class="formbtn" />
+     <input type="submit" name="submit" value="提交" class="formbtn" /><h1><a href="{:U('Truth/index')}">对微博内容发起求真相</a></h1>
 </form>
    <div>
-		<div id="body" style="float:left; height:50px;width:650px"><h2><strong>搜索模块</strong></h2></div>
-        <div id="body-right"style="float:left; height:50px;width:150px"><h2><a href="{:U('Index/insearch')}">按兴趣搜索</a></h2></div>
+		<div id="body" style="float:left; height:50px;width:350px"><h2><strong>搜索模块</strong></h2></div><div id="body-right1"style="float:left; height:50px;width:150px"><h3><a href="{:U('Index/mysearch')}">我发起的求真相</a></h3></div>
+        <div id="body-right"style="float:left; height:50px;width:150px"><h3><a href="{:U('Index/myjoinsearch')}">我参与的求真相</a></h3></div><div id="body-right"style="float:left; height:50px;width:150px"><h3><a href="{:U('Index/insearch')}">按兴趣搜索</a></h3></div>
         <div style="clear:both"></div>
        </div>
 	<form name="form2" id="form2" method="post" action="{:U('Index/search')}">
@@ -46,18 +48,22 @@
 	<input type="submit" name="search" value="搜索"/>
 </form>
  
-    <h2><a href="{:U('Truth/index')}">我也要求真相</a></h2>
+    
 	 <ul class="thumb">
 	 <volist name="infolist" id="vo">
 	 <li type="" class="left" id="list{$vo.id}">
 	 <div class="mdiv">
 <p>
-        &nbsp; 内容：<a href="{:U('Index/answerlist',array('id'=>$vo['id']))}"><span id="clname{$vo.id}"><pre>&nbsp;{$vo.content}</pre></span></a>&nbsp;支持：{$vo.z}      &nbsp;反对：{$vo.f}  &nbsp;    提问人：{$vo.author_userid} &nbsp;   <if condition="$vo.state eq 0">求真相中……</if><if condition="$vo.state eq 1">这是真相！</if><if condition="$vo.state eq 2">这是假象！</if><if condition="$vo.state eq 3">真假难辨</if><br/>
+    &nbsp; 内容：<a href="{:U('Index/answerlist',array('id'=>$vo['id']))}"><span id="clname{$vo.id}"><pre>&nbsp;{$vo.content}</pre></span></a>&nbsp;支持：{$vo.z}      &nbsp;反对：{$vo.f}  &nbsp; 标签：{$vo.label} &nbsp;   提问人：{$vo.author_userid} &nbsp;&nbsp;   <if condition="$vo.state eq 0">求真相中……距离揭露真相还有——{$vo.end_time}</if><if condition="$vo.state eq 1">这是真相！</if><if condition="$vo.state eq 2">这是假象！</if><if condition="$vo.state eq 3">真假难辨</if><br/>
 	 </p>
 	 </div>
 	 </li>
 	 </volist>
 	 </ul>
+    <div class="clr"></div>
+	{$page} 
+<div class="clr"></div>
 </div>
+    
 </body>
 </html>

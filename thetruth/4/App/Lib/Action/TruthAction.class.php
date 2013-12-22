@@ -8,10 +8,18 @@ class TruthAction extends Action
         session_start();
 		error_reporting(1);
         $c = new SaeTClientV2( WB_AKEY , WB_SKEY , $_SESSION['token']['access_token'] );
+		$uid_get = $c->get_uid();
+		$uid = $uid_get['uid'];
+		$user_message = $c->show_user_by_id( $uid);
+		$usrname = $user_message['screen_name'];
+         if(!$usrname)
+        {
+            $this->error('您还没有授权，现在转移到授权页面','http://thetruth.sinaapp.com/');
+        }
         $uid_get = $c->get_uid();
 		$uid = $uid_get['uid'];
 		$user_message = $c->show_user_by_id( $uid);
-		$ms  = $c->home_timeline();
+		$ms  = $c->home_timeline(1,50,0,0,0,1);
         $usrname = $user_message['screen_name'];
         $this->assign('weibolist',$ms['statuses']);
         $this->assign('username',$usrname);
@@ -27,10 +35,58 @@ class TruthAction extends Action
         session_start();
 		error_reporting(1);
         $c = new SaeTClientV2( WB_AKEY , WB_SKEY , $_SESSION['token']['access_token'] );
+		$uid_get = $c->get_uid();
+		$uid = $uid_get['uid'];
+		$user_message = $c->show_user_by_id( $uid);
+		$usrname = $user_message['screen_name'];
+         if(!$usrname)
+        {
+            $this->error('您还没有授权，现在转移到授权页面','http://thetruth.sinaapp.com/');
+        }
         $weiboid=$_REQUEST['id'];
 		$info=$c->show_status($weiboid);
         $this->assign('info',$info);
         $this->display();
+    }
+    public function zhuanfa() 
+    {
+        session_start();
+		error_reporting(1);
+        $c = new SaeTClientV2( WB_AKEY , WB_SKEY , $_SESSION['token']['access_token'] );
+		$uid_get = $c->get_uid();
+		$uid = $uid_get['uid'];
+		$user_message = $c->show_user_by_id( $uid);
+		$usrname = $user_message['screen_name'];
+         if(!$usrname)
+        {
+            $this->error('您还没有授权，现在转移到授权页面','http://thetruth.sinaapp.com/');
+        }
+        $weiboid=$_REQUEST['id'];
+        $id=$_REQUEST['truthid'];
+        $info=$c->show_status($weiboid);
+        $url="http://thetruth.sinaapp.com/login.php/Index/answerlist/id/".$id.".html";
+        $a=$c->shorten($url);
+        $mytext="我在find_the_truth对该微博发起了求真相".$a['urls'][0]['url_short'];
+        $this->assign('mytext',$mytext);
+        $this->assign('info',$info);
+        $this->display();
+    }
+    public function weibozhuanfa() 
+    {
+        session_start();
+		error_reporting(1);
+        $c = new SaeTClientV2( WB_AKEY , WB_SKEY , $_SESSION['token']['access_token'] );
+        $weiboid=$_REQUEST['id'];
+        $text=$_REQUEST['zhuanfa'];
+        $ret=$c->repost($weiboid,$text);
+        if ( isset($ret['error_code']) && $ret['error_code'] > 0 ) 
+        {
+			$this->error("转发失败,请重试");
+		} 
+        else 
+        {
+            $this->success("转发成功",U('Index/index'));
+		}
     }
     public function textsubmit() 
     {
@@ -61,6 +117,8 @@ class TruthAction extends Action
         $mydata['time']=$lasttime;
         if($actor)
         $mydata['actor']=$actor;
+        if($info['bmiddle_pic'])
+            $mydata['url']=$info['bmiddle_pic'];
         
         if(!$actor&&$lasttime==0)
             $this->error('时间和人数控制不可同时为0!');
@@ -68,7 +126,11 @@ class TruthAction extends Action
 		$mydata['author_userid']=$user_message['screen_name'];
         $mydata['create_time']=time();
 		$mydata['state']=0;
-		$mydata['label']='你妹';
+		$text1= $_POST['label'];
+        //echo $text1;
+        //if(!$text1){$this->error('请为您的待求真相选择一个标签!');}
+        if(!$text1){$mydata['label']='其他';}
+		else{$mydata['label']=$text1;}
 		$mydata['z']=0;
 		$mydata['f']=0;
 		if($mydata) 
@@ -76,7 +138,7 @@ class TruthAction extends Action
 			$result	=$model->add($mydata);
 			if($result)
 			{
-                $this->success('提交成功',U('Index/index'));
+                $this->success('提交成功',U('Truth/zhuanfa',array('id'=>$weiboid,'truthid'=>$result)));
 			}
 			else{$this->error('提交失败');}
 		}
@@ -110,7 +172,15 @@ class TruthAction extends Action
         
         session_start();
 		error_reporting(1);
-         $c = new SaeTClientV2( WB_AKEY , WB_SKEY , $_SESSION['token']['access_token'] );
+        $c = new SaeTClientV2( WB_AKEY , WB_SKEY , $_SESSION['token']['access_token'] );
+		$uid_get = $c->get_uid();
+		$uid = $uid_get['uid'];
+		$user_message = $c->show_user_by_id( $uid);
+		$usrname = $user_message['screen_name'];
+         if(!$usrname)
+        {
+            $this->error('您还没有授权，现在转移到授权页面','http://thetruth.sinaapp.com/');
+        }
         $keyword=$_REQUEST['name'];
         $namelist=$c->search_at_users($keyword,30);
         $this->assign('namelist',$namelist);
@@ -125,9 +195,14 @@ class TruthAction extends Action
         session_start();
 		error_reporting(1);
         $c = new SaeTClientV2( WB_AKEY , WB_SKEY , $_SESSION['token']['access_token'] );
-        $uid_get = $c->get_uid();
+		$uid_get = $c->get_uid();
 		$uid = $uid_get['uid'];
 		$user_message = $c->show_user_by_id( $uid);
+		$usrname = $user_message['screen_name'];
+         if(!$usrname)
+        {
+            $this->error('您还没有授权，现在转移到授权页面','http://thetruth.sinaapp.com/');
+        }
          
         $id=$_REQUEST['id'];
          
@@ -136,7 +211,7 @@ class TruthAction extends Action
          $ms=array();
         while($i<20&&$j<10)
         {
-            $temp=$c->home_timeline($j,100);
+            $temp=$c->home_timeline($j,100,0,0,0,1);
             $j++;
             
             if($temp['statuses'])

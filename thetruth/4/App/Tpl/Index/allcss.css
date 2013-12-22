@@ -1,13 +1,6 @@
 body{font:400 14px/25px 'Microsoft Yahei',Tahoma,sans-serif;background:#fff;background-image: url(/App/Tpl/Index/bg.jpg);}
-.mdiv{
-	background-color: #F7F7F7;
-	margin: 0 auto;
-	border: solid 1px #e9ebf0;
-	word-wrap:break-word;
-	word-break:normal;
-	opacity:0.8;
-	border-left: 10px;
-}
+.mdiv{background-color: #F7F7F7;margin: 0 auto;border: solid 1px #e9ebf0;word-wrap:break-word;
+word-break:normal;opacity:0.8;border-left: 10px;}
 .mdiv:hover {background-color: #f1f1f1;margin: 0 auto;
 border: solid 1px #e9ebf0;word-wrap:break-word; word-break:normal;opacity:0.9; }
 a {text-decoration:none}

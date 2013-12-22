@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" language="JavaScript"></script>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
+<head> 
+<title>求真相</title>
+<link href="/App/Tpl/Index/allcss.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<script type="text/javascript">
+ 
+function myzhuanfa()
+ {	
+	document.form1.action = "{:U('Truth/weibozhuanfa',array('id'=>$info['id']))}";
+	document.form1.submit();
+ }
+function myquxiao()
+ {
+   //alert("jjj");
+   document.form1.action = "{:U('Index/index')}";
+     document.form1.submit();
+ }
+ </script>
+<div class="content">
+    &nbsp;{$info.text}<br/>
+     <form name="form1" id="form1" method="post">
+    <textarea name="zhuanfa" rows="10" cols="70" id="zhuanfa">{$mytext}</textarea><br/>
+    是否对这条微博进行转发？（不转发微博不影响求真相的发起）
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="submit1" value="转发" class="formbtn" onclick="javascript:myzhuanfa();" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="submit2" value="取消" class="formbtn" onclick="javascript:myquxiao();" />
+    </form>
+	</div>
+</body>
+</html>

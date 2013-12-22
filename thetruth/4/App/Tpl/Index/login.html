@@ -11,7 +11,10 @@ language="JavaScript"></script>
 </head>
 <body>
 	<div class="content">
-    <h3><strong>{$usrname},请选择您感兴趣的分组</strong></h3>
+	
+<h2><a href="{:U('Index/index')}">暂不修改兴趣分组直接进入大厅</a></h2>
+
+    	<h3><strong>{$usrname},请选择您感兴趣的分组</strong></h3>
 	<form name="form1" id="form1" method="post" action="{:U('Index/login_cs')}">
 	<input name="label[]" type="checkbox"  value = 1>电子数码
 	<input name="label[]" type="checkbox"  value = 2>医疗健康
@@ -26,7 +29,7 @@ language="JavaScript"></script>
 	<br/>
 	<input type="submit" name="submit" value="提交" class="formbtn" />
 </form>
-	
+<h3><strong>{$usrname},您当前的兴趣分组为: {$interest0}{$interest1}{$interest2}{$interest3}{$interest4}{$interest5}{$interest6}{$interest7}{$interest8}{$interest9}</strong></h3>
 </div>
 </body>
 </html>

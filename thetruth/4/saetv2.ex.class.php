@@ -582,7 +582,11 @@ class SaeTClientV2
 
 		return $this->oauth->get('statuses/home_timeline', $params);
 	}
-
+	function shorten($url)
+	{
+		$params['url_long']=$url;
+		return $this->oauth->get('short_url/shorten',$params);
+	}
 	/**
 	 * 获取当前登录用户及其所关注用户的最新微博消息。
 	 *

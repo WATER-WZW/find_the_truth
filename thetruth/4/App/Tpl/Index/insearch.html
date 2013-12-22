@@ -13,12 +13,15 @@
 	 <li id="list{$vo.id}" class="left">
 	 <div class="mdiv">
 	 <p>
-		&nbsp; 内容：<a href="{:U('Index/answerlist',array('id'=>$vo['id']))}"><span id="clname{$vo.id}"><pre>&nbsp;{$vo.content}</pre></span></a>&nbsp;支持：{$vo.z}      反对：{$vo.f}      提问人：{$vo.author_userid}    <if condition="$vo.state eq 0">求真相中……</if><if condition="$vo.state eq 1">这是真相！</if><if condition="$vo.state eq 2">这是假象！</if><if condition="$vo.state eq 3">真假难辨</if><br/>
+         &nbsp; 内容：<a href="{:U('Index/answerlist',array('id'=>$vo['id']))}"><span id="clname{$vo.id}"><pre>&nbsp;{$vo.content}</pre></span></a>&nbsp;支持：{$vo.z}      反对：{$vo.f}   标签：{$vo.label}   提问人：{$vo.author_userid}    <if condition="$vo.state eq 0">求真相中……  距离揭露真相还有——{$vo.end_time}</if><if condition="$vo.state eq 1">这是真相！</if><if condition="$vo.state eq 2">这是假象！</if><if condition="$vo.state eq 3">真假难辨</if><br/>
 	 </p>
 	 </div>
 	 </li>
 	 </volist>
   </ul>
+    <div class="clr"></div>
+	{$page} 
+<div class="clr"></div>
 </div>
 </body>
 </html>

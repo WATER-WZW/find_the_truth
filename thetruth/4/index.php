@@ -14,6 +14,10 @@ $code_url = $o->getAuthorizeURL( WB_CALLBACK_URL );
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>新浪微博PHP SDK V2版 Demo - Powered by Sina App Engine</title>
+<style type="text/css">
+p {position:absolute; top:450px; left:400px;}
+body {background-image:url(fm.jpg); background-repeat: no-repeat;}
+</style>
 </head>
 
 <body>
