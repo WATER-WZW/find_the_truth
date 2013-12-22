@@ -8,7 +8,7 @@
 <body>
 	<div class="content">
 	  <div id="body" style="float:left; height:50px;width:800px"><h3><strong>{$usrname},您好！</strong></h3></div>
-      <div id="body-right"style="float:left; height:50px;width:90px"><h4><a href="{:U('Index/changein')}">修改个人资料</a></h4></div>
+      <div id="body-right"style="float:left; height:50px;width:90px"><h4><a href="{:U('Index/login')}">修改个人资料</a></h4></div>
 	  <form name="form1" id="form1" method="post" action="{:U('Index/submit')}">
         <textarea name="thetruth" rows="10" cols="70" id="thetruth" value="请在这里输入想要寻找的真相" onfocus="if(this.value=='请在这里输入想要寻找的真相'){this.value=''}" onblur="if(this.value=='') {this.value='请在这里输入想要寻找的真相'}">请在这里输入想要寻找的真相</textarea><br/>
     <input name="label" type="radio" value = "电子数码">电子数码
